@@ -4,6 +4,13 @@
         "sdk_errors.h": "c",
         "nrf_log.h": "c",
         "string": "c",
-        "nrf_log_ctrl.h": "c"
-    }
+        "nrf_log_ctrl.h": "c",
+        "ble_hci.h": "c",
+        "bsp_btn_ble.h": "c",
+        "app_util_platform.h": "c",
+        "nrf_uarte.h": "c"
+    },
+
+    "cortex-debug.JLinkGDBServerPath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServer",
+    "cortex-debug.armToolchainPath": "C:/Program Files (x86)/GNU Tools Arm Embedded/9 2019-q4-major/bin"
 }
