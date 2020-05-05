@@ -480,7 +480,7 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             break;*/
 
         case A_BUTTON:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x01);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -489,18 +489,18 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n01000000000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n01000000000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
 
             break;
         
         case B_BUTTON:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x02);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -509,16 +509,16 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n00100000000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n00100000000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
-            }
+            }*/
             break;
         
         case X_BUTTON:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x03);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -527,17 +527,17 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n000100000000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n000100000000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
             break;
 
         case Y_BUTTON:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x04);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -546,17 +546,17 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n00001000000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n00001000000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
             break;
 
         case PAUSE_BUTTON:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x05);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -565,19 +565,19 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n10000000000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n10000000000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
 
             bsp_board_led_invert(LEDBUTTON_LED); // to make LED turn on and off during pause press
             break;
         
         case RIGHT_TRIGGER:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x06);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -586,17 +586,17 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 APP_ERROR_CHECK(err_code);
             }
 
-            uint8_t *tx_data = (uint8_t *)("\r\n00000100000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n00000100000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
             break;
         
         case LEFT_TRIGGER:
-            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, button_action);
+            err_code = ble_lbs_on_button_change(m_conn_handle, &m_lbs, 0x07);
             if (err_code != NRF_SUCCESS &&
                 err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
                 err_code != NRF_ERROR_INVALID_STATE &&
@@ -604,13 +604,13 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
-            uint8_t *tx_data = (uint8_t *)("\r\n00000010000\r\n");
+            /*uint8_t *tx_data = (uint8_t *)("\r\n00000010000\r\n");
 
             for (uint32_t i = 0; i < 11; i++)
             {
                 while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
         
-            }
+            }*/
             break;
 
         default:
@@ -784,7 +784,7 @@ int main(void)
 
     // Start execution.
     advertising_start();
-    uint32_t err_code;
+    /*uint32_t err_code;
 
     const app_uart_comm_params_t comm_params =
       {
@@ -803,7 +803,7 @@ int main(void)
                          uart_error_handle,
                          APP_IRQ_PRIORITY_LOWEST,
                          err_code);
-    APP_ERROR_CHECK(err_code);
+    APP_ERROR_CHECK(err_code);*/
 
     // Enter main loop.
     for (;;)
