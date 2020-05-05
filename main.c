@@ -21,10 +21,13 @@
 #include "nrf_ble_qwr.h"
 #include "nrf_pwr_mgmt.h"
 #include "nrf_drv_gpiote.h"
-//#include "app_uart.h"
+#include "app_uart.h"
+//#include "ble_nus.h"
+#include "app_util_platform.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
+#include "nrf_uart.h"
 
 
 #define ADVERTISING_LED                 BSP_BOARD_LED_0                         /**< Is on when device is advertising. */
@@ -40,6 +43,7 @@
 #define RIGHT_TRIGGER                   20        
 
 #define DEVICE_NAME                     "Controller"                         /**< Name of device. Will be included in the advertising data. */
+#define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN
 
 #define APP_BLE_OBSERVER_PRIO           3                                       /**< Application's BLE observer priority. You shouldn't need to modify this value. */
 #define APP_BLE_CONN_CFG_TAG            1                                       /**< A tag identifying the SoftDevice BLE configuration. */
@@ -61,9 +65,11 @@
 
 #define DEAD_BEEF                       0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
-#define UART_TX_BUF_SIZE                256
-#define UART_RX_BUF_SIZE                256  
+#define UART_TX_BUF_SIZE                12
+#define UART_RX_BUF_SIZE                12
+#define UART_HWFC APP_UART_FLOW_CONTROL_ENABLED
 
+//BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                               /**< BLE NUS service instance. */
 BLE_LBS_DEF(m_lbs);                                                             /**< LED Button Service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                                       /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                                         /**< Context for the Queued Write module.*/
@@ -447,12 +453,14 @@ static void ble_stack_init(void)
 }
 
 
-/**@brief Function for handling events from the button handler module.
+
+/**@brief Function for handling events from the button handler module. (leveraged instead of using own input interuppt handler below)
  *
  * @param[in] pin_no        The pin that the event applies to.
  * @param[in] button_action The button action (press/release).
  */
 // button IRQ essentially
+// UART TX writes came from Nayef's test case function
 static void button_event_handler(uint8_t pin_no, uint8_t button_action)
 {
     ret_code_t err_code;
@@ -480,6 +488,15 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n01000000000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
+            }
+
             break;
         
         case B_BUTTON:
@@ -490,6 +507,13 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
             {
                 APP_ERROR_CHECK(err_code);
+            }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n00100000000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
             }
             break;
         
@@ -502,6 +526,14 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n000100000000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
+            }
             break;
 
         case Y_BUTTON:
@@ -512,6 +544,14 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
                 err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
             {
                 APP_ERROR_CHECK(err_code);
+            }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n00001000000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
             }
             break;
 
@@ -524,6 +564,15 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n10000000000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
+            }
+
             bsp_board_led_invert(LEDBUTTON_LED); // to make LED turn on and off during pause press
             break;
         
@@ -536,6 +585,14 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
+
+            uint8_t *tx_data = (uint8_t *)("\r\n00000100000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
+            }
             break;
         
         case LEFT_TRIGGER:
@@ -547,6 +604,13 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
             {
                 APP_ERROR_CHECK(err_code);
             }
+            uint8_t *tx_data = (uint8_t *)("\r\n00000010000\r\n");
+
+            for (uint32_t i = 0; i < 11; i++)
+            {
+                while (app_uart_put(tx_data[i]) != NRF_SUCCESS);
+        
+            }
             break;
 
         default:
@@ -556,9 +620,9 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
 }
 
 
-/**@brief Function for initializing the button handler module.
+/**@brief Function for initializing the button handler module. (leveraged from example, configured to setup of our buttons i.e. no pullups)
  */
-// initially had error with sdk_congig only being setup to 4 low power events #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 7
+// initially had error with sdk_config only being setup to 4 low power events #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 7
 //                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 static void buttons_init(void)
@@ -595,6 +659,18 @@ static void buttons_init(void)
     //APP_ERROR_CHECK(err_code);
 }
 
+void uart_error_handle(app_uart_evt_t * p_event)
+{
+    if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
+    {
+        APP_ERROR_HANDLER(p_event->data.error_communication);
+    }
+    else if (p_event->evt_type == APP_UART_FIFO_ERROR)
+    {
+        APP_ERROR_HANDLER(p_event->data.error_code);
+    }
+}
+
 
 static void log_init(void)
 {
@@ -629,7 +705,7 @@ static void idle_state_handle(void)
 
 
 /*
-    This was going to be my original interrupt handler for the buttons, but then I decided to use the button event
+    This was going to be our original interrupt handler for the buttons, but then we decided to use the button event
     handler from the example,
 */
 /*void in_pin_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
@@ -655,7 +731,7 @@ static void idle_state_handle(void)
 }*/
 
 /**
- * setup button pins as GPIO inputs, one of my original setups, but it was better to initialize them as GPIOTE or buttons.
+ * setup button pins as GPIO inputs, one of our original setups, but it was better to initialize them as GPIOTE or buttons.
  * 
  */
 
@@ -707,8 +783,27 @@ int main(void)
     
 
     // Start execution.
-    NRF_LOG_INFO("Blinky example started.");
     advertising_start();
+    uint32_t err_code;
+
+    const app_uart_comm_params_t comm_params =
+      {
+          RX_PIN_NUMBER,
+          TX_PIN_NUMBER,
+          RTS_PIN_NUMBER,
+          CTS_PIN_NUMBER,
+          UART_HWFC,
+          false,
+          NRF_UART_BAUDRATE_115200
+      };
+
+    APP_UART_FIFO_INIT(&comm_params,
+                         UART_RX_BUF_SIZE,
+                         UART_TX_BUF_SIZE,
+                         uart_error_handle,
+                         APP_IRQ_PRIORITY_LOWEST,
+                         err_code);
+    APP_ERROR_CHECK(err_code);
 
     // Enter main loop.
     for (;;)

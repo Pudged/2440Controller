@@ -8,7 +8,9 @@
         "ble_hci.h": "c",
         "bsp_btn_ble.h": "c",
         "app_util_platform.h": "c",
-        "nrf_uarte.h": "c"
+        "nrf_uarte.h": "c",
+        "app_uart.h": "c",
+        "ble_nus.h": "c"
     },
 
     "cortex-debug.JLinkGDBServerPath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServer",

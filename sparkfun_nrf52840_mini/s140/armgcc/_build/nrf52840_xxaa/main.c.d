@@ -118,6 +118,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../modules/nrfx/drivers/include/nrfx_gpiote.h \
  ../../../../../../modules/nrfx/hal/nrf_gpiote.h \
  ../../../../../../modules/nrfx/hal/nrf_gpio.h \
+ ../../../../../../components/libraries/uart/app_uart.h \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/strerror/nrf_strerror.h \
  ../../../../../../components/libraries/log/src/nrf_log_internal.h \
@@ -129,7 +130,8 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\9\ 2019-q4-major\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\9\ 2019-q4-major\arm-none-eabi\include\machine\stdlib.h \
  ../../../../../../components/libraries/balloc/nrf_balloc.h \
- ../../../../../../components/libraries/log/nrf_log_default_backends.h
+ ../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ ../../../../../../modules/nrfx/hal/nrf_uart.h
 
 c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\9\ 2019-q4-major\lib\gcc\arm-none-eabi\9.2.1\include\stdint.h:
 
@@ -369,6 +371,8 @@ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\9\ 2019-q4-major\lib\gcc\arm-
 
 ../../../../../../modules/nrfx/hal/nrf_gpio.h:
 
+../../../../../../components/libraries/uart/app_uart.h:
+
 ../../../../../../components/libraries/log/nrf_log.h:
 
 ../../../../../../components/libraries/strerror/nrf_strerror.h:
@@ -392,3 +396,5 @@ c:\program\ files\ (x86)\gnu\ tools\ arm\ embedded\9\ 2019-q4-major\arm-none-eab
 ../../../../../../components/libraries/balloc/nrf_balloc.h:
 
 ../../../../../../components/libraries/log/nrf_log_default_backends.h:
+
+../../../../../../modules/nrfx/hal/nrf_uart.h:
